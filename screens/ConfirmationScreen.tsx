@@ -34,8 +34,8 @@ const ConfirmationScreen = ({ route }: { route: ConfirmationScreenRouteProp }) =
 
         {/* Icono */}
         <View className="mb-6 items-center">
-          <View className="h-20 w-20 items-center justify-center rounded-full bg-blue-100">
-            <Image source={require('../assets/icons/telefono.png')} className="h-10 w-10" />
+          <View className="h-20 w-20 items-center justify-center rounded-full bg-[#E6F3F0]">
+            <Image source={require('../assets/icons/transferir.png')} className="h-10 w-10" />
           </View>
         </View>
 
