@@ -4,9 +4,22 @@ import { View, Text, ScrollView, Image, TextInput, TouchableOpacity } from 'reac
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import useStore from 'store/useStore';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from 'navigation';
+
+// Asignar tipo a NavigationProps
+type NavigationProps = StackNavigationProp<RootStackParamList, 'TransferScreen'>;
 
 const TransferScreen = () => {
-  const navigation = useNavigation();
+  //Pasar los props que seran utilizados por la pantalla de confirmacion
+  const navigation = useNavigation<NavigationProps>();
+  const handleProceed = () => {
+    navigation.navigate('ConfirmationScreen', {
+      amount,
+      accountNumber,
+    });
+  };
+
   const { account } = useStore();
   const [accountNumber, setAccountNumber] = useState('');
   const [amount, setAmount] = useState('');
@@ -16,8 +29,6 @@ const TransferScreen = () => {
 
   // El boton no estara activo a menos que se llenen los campos
   const isDisabled = !accountNumber || !isAmountValid;
-
-  const arrow = '<';
 
   return (
     <SafeAreaView className="flex-1 bg-white p-6">
@@ -31,12 +42,12 @@ const TransferScreen = () => {
           <Text className="absolute left-1/2 -translate-x-1/2 text-2xl">Transferir dinero</Text>
         </View>
 
-        {/* Title */}
+        {/* Titulo */}
         <Text className="mb-6 text-center text-2xl font-semibold text-black">
           ¿A quién le enviarás dinero hoy?
         </Text>
 
-        {/* Account Number Input */}
+        {/* Input para Numero de Cuenta */}
         <Text className="text-black">Ingresa el número de cuenta</Text>
         <View className="relative">
           <TextInput
@@ -55,7 +66,7 @@ const TransferScreen = () => {
           )}
         </View>
 
-        {/* Amount Input */}
+        {/* Input para Cantidad */}
         <Text className="text-black">¿Cuánto dinero le enviarás?</Text>
         <View className="w-full">
           <TextInput
@@ -78,10 +89,11 @@ const TransferScreen = () => {
           No se puede transferir. Saldo insuficiente
         </Text>
       </ScrollView>
-      {/* Submit Button Fixed at Bottom */}
+      {/* Boton de Envio */}
       <View className="border-gray-300 bg-white p-2">
         <TouchableOpacity
           disabled={isDisabled}
+          onPress={handleProceed}
           className={`rounded-full p-4 text-center ${isDisabled ? 'bg-gray-300' : 'bg-[#018765]'}`}>
           <Text className="text-center text-xl font-bold text-white">Enviar</Text>
         </TouchableOpacity>

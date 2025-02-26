@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Definimos la interfaz para la cuenta del usuario
-interface Account {
+export interface Account {
   alias: string; // Nombre de la cuenta (Ej: "Cuenta de ahorro")
   account_number: number; // Número de cuenta
   balance: number; // Saldo de la cuenta
@@ -32,6 +32,14 @@ interface User {
     type: string; // Tipo de producto (Ej: "Cuenta de ahorros")
     id: string; // ID del producto (Número de cuenta)
   }[];
+}
+
+// Definimos la interfaz para crear las transacciones
+interface CreateTransactionRequest {
+    origin: string,
+    destination: string,
+    amount: number,
+    currency: string
 }
 
 // Inicializamos la instancia de axios
@@ -85,3 +93,4 @@ export const fetchUsers = async (id: number) => {
       return null;
     }
   };
+
