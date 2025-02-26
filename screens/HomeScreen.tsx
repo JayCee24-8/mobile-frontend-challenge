@@ -4,6 +4,9 @@ import { View, Text, SafeAreaView, Button, ScrollView, Image, ImageBackground } 
 import { fetchAccount, fetchTransactions, fetchUsers } from '../utils/api';
 import useStore from '../store/useStore';
 import Header from 'components/Header';
+import AccountCard from 'components/AccountCard';
+import QuickActions from 'components/QuickActions';
+import TransactionList from 'components/TransactionList';
 
 // Definimos los tipos de las propiedades que recibe el hook
 interface UseAccountDataProps {
@@ -19,12 +22,12 @@ const useAccountData = ({ accountId, userId }: UseAccountDataProps) => {
     const loadData = async () => {
       setLoading(true);
       try {
-        // Obtener datos de la cuenta, transacciones y usuario
+        // Obtener datos del usuario
         const userResponse = await fetchUsers(userId);
 
-        // 🔹 Obtener la cuenta con el número correcto
-        const accountResponse = await fetchAccount(Number(accountId));
-        const transactionsResponse = await fetchTransactions(Number(accountId));
+        // Obtener la cuenta con el número correcto
+        const accountResponse = await fetchAccount(accountId);
+        const transactionsResponse = await fetchTransactions(accountId);
 
         // Asignar los datos al estado global
         setAccount(accountResponse);
@@ -58,11 +61,16 @@ const HomeScreen = () => {
   const firstName = user?.full_name?.split(' ')[0] || 'Usuario';
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
+    <SafeAreaView className="flex-1 bg-white">
       <StatusBar style="light" />
       {/* Header */}
       <View className="absolute left-0 right-0 top-0">
         <Header />
+        <View className="flex-col">
+          <AccountCard />
+          <QuickActions />
+          <TransactionList />
+        </View>
       </View>
     </SafeAreaView>
   );

@@ -4,6 +4,7 @@ import useStore from '../store/useStore';
 
 const Header = () => {
   const { user } = useStore();
+
   const firstName = user?.full_name?.split(' ')[0] || 'Usuario';
 
   return (
@@ -31,7 +32,7 @@ const Header = () => {
         <View className="justify-left absolute bottom-[120px] left-6 mb-2  flex-row items-center">
           <Text className="text-xl font-semibold text-white">Mis productos</Text>
           <TouchableOpacity>
-            <Image source={require('../assets/icons/Eye.png')} className="ml-3 h-6 w-6" />
+            <Image source={require('../assets/icons/ojo.png')} className="ml-3 h-6 w-6" />
           </TouchableOpacity>
         </View>
       </ImageBackground>
