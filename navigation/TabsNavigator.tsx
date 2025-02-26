@@ -15,14 +15,14 @@ const TabsNavigator = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
           let icon;
-          let color = focused ? '#018765' : '#434343'; // ✅ Green for active, gray for inactive
+          let color = focused ? '#018765' : '#434343';
 
           if (route.name === 'Inicio') {
             icon = require('../assets/icons/Home.png');
           } else if (route.name === 'Operaciones') {
-            icon = require('../assets/icons/Arrows.png');
+            icon = require('../assets/icons/Flechas.png');
           } else if (route.name === 'Productos') {
-            icon = require('../assets/icons/Card.png');
+            icon = require('../assets/icons/tarjeta.png');
           }
 
           return (
