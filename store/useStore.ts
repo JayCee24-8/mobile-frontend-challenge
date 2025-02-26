@@ -44,6 +44,7 @@ interface StoreState {
   setTransactions: (transactions: Transaction[]) => void;
   setUser: (user: User) => void;
   setLoading: (loading: boolean) => void;
+  //addTransaction: (transaction: Transaction) => void;
 }
 
 // Creamos el store global con Zustand
@@ -58,6 +59,7 @@ const useStore = create<StoreState>((set) => ({
   setTransactions: (transactions) => set({ transactions }),
   setUser: (user) => set({ user }),
   setLoading: (loading) => set({ loading }),
+  //addTransaction: (transaction) => set((state) => ({transactions: [transaction, ...state.transactions]})) // Pusheamos la nueva transaccion
 }));
 
 export default useStore;

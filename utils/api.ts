@@ -64,12 +64,24 @@ export const fetchTransactions = async (accountNumber: number): Promise<Transact
 };
 
 // Obtener la información del usuario
-export const fetchUsers = async (userId: number): Promise<User> => {
-  try {
-    const response = await api.get<User>(`/users/${userId}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-    throw new Error('Failed to fetch user data.');
-  }
-};
+export const fetchUsers = async (id: number) => {
+    try {
+      const response = await api.get(`/users/${id}`);
+      let fixedResponse = response.data;
+  
+      fixedResponse = fixedResponse.replace(/,\s*}/g, "}").replace(/,\s*]/g, "]");
+  
+      let parsedData;
+      try {
+        parsedData = JSON.parse(fixedResponse);
+      } catch (error) {
+        console.error("Error parsing JSON (Users):", error);
+        throw new Error("Failed to parse user data");
+      }
+  
+      return parsedData;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      return null;
+    }
+  };
