@@ -45,8 +45,9 @@ Este proyecto es un mockup de una aplicación móvil desarrollada con **React Na
    npx expo install react-native-gesture-handler react-native-screens react-native-safe-area-context react-native-reanimated react-native-vector-icons @react-navigation/native
    ```
 4. **Iniciar la aplicación**
+   
    ```sh
-   npx expo start
+   npm run start
    ```
 
 ---
